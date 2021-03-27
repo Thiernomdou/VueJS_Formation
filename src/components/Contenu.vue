@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-5">
-        <h1>{{ titre }}</h1>
+        <!-- <h1>{{ titre }}</h1>
 
         <div class="btn btn-outline-primary mr-2 mb-2" v-on:click="component = 'texte1'">Onglet 1</div>
         <div class="btn btn-outline-primary mb-2" v-on:click="component = 'texte2'">Onglet 2</div>
@@ -11,54 +11,68 @@
 
         <modale :revele="revele" :toggleModale="toggleModale"></modale>
 
-        <div v-on:click="toggleModale" class="btn btn-success">Ouvre la modale</div>
+        <div v-on:click="toggleModale" class="btn btn-success">Ouvre la modale</div> -->
         
+        <h1>Appel à une API</h1>
+        <img :src="urlImg" alt="image">
+
+
     </div>
 </template>
 
 <script>
 
 
-import Texte1 from './Texte1'
-import Texte2 from './Texte2'
-import Modale from './Modale'
+// import Texte1 from './Texte1'
+// import Texte2 from './Texte2'
+// import Modale from './Modale'
 
-
+import axios from 'axios'
 
 export default {
     name: 'Contenu',
     data() {
         return {
-            myArr: [
-                {titre: 'Inception', date: 2010},
-                {titre: 'Avatar', date: 2009},
-                {titre: 'Seven', date: 1995}
-            ],
-            txt: 'Hello World',
-            titre: 'Je suis le titre',
-            toggle1: true,
-            toggle2: false,
-            component: 'texte1',
-            revele: false
+            // myArr: [
+            //     {titre: 'Inception', date: 2010},
+            //     {titre: 'Avatar', date: 2009},
+            //     {titre: 'Seven', date: 1995}
+            // ],
+            // txt: 'Hello World',
+            // titre: 'Je suis le titre',
+            // toggle1: true,
+            // toggle2: false,
+            // component: 'texte1',
+            // revele: false
+            urlImg : null
         }
     },
     methods: {
-       toggleOng1: function() {
-           this.toggle1 = true,
-           this.toggle2 = false
-       },
-       toggleOng2: function() {
-           this.toggle1 = false,
-           this.toggle2 = true
-       },
-       toggleModale: function() {
-           this.revele = !this.revele
-       }
+    //    toggleOng1: function() {
+    //        this.toggle1 = true,
+    //        this.toggle2 = false
+    //    },
+    //    toggleOng2: function() {
+    //        this.toggle1 = false,
+    //        this.toggle2 = true
+    //    },
+    //    toggleModale: function() {
+    //        this.revele = !this.revele
+    //    }
+    },
+    // Quand le composant sera bien affiché
+    mounted() {
+        axios
+        .get('https://api.thecatapi.com/v1/images/search')
+        .then(reponse => {
+            console.log(reponse);
+            this.urlImg = reponse.data[0].url
+        })
     },
     components: {
-       'texte1': Texte1,
-       'texte2': Texte2,
-       'modale': Modale
+    //    'texte1': Texte1,
+    //    'texte2': Texte2,
+    //    'modale': Modale
     }
 }
 

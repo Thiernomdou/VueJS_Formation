@@ -13,10 +13,10 @@
 </template>
 
 <script>
-       export default {
-           name: 'Modale',
-           props: ['revele', 'toggleModale']
-       }
+    export default {
+        name: 'Modale',
+        props: ['revele', 'toggleModale']
+    }
 </script>
 
   
