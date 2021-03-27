@@ -6,12 +6,13 @@
         <div class="btn btn-outline-primary mb-2" v-on:click="component = 'texte2'">Onglet 2</div>
             
         <div class="onglets card mb-5" >
-        <!-- <texte1 class="p-5" v-if="toggle1"></texte1>
-        <texte2 class="p-5" v-if="toggle2"></texte2> -->
-        <!-- Afficher dynamiquement -->
-            <component class="p-5" v-bind:is="component"></component>
+            <component class="p-5" :is="component"></component>
         </div>
 
+        <modale :revele="revele" :toggleModale="toggleModale"></modale>
+
+        <div v-on:click="toggleModale" class="btn btn-success">Ouvre la modale</div>
+        
     </div>
 </template>
 
@@ -20,6 +21,8 @@
 
 import Texte1 from './Texte1'
 import Texte2 from './Texte2'
+import Modale from './Modale'
+
 
 
 export default {
@@ -35,7 +38,8 @@ export default {
             titre: 'Je suis le titre',
             toggle1: true,
             toggle2: false,
-            component: 'texte1'
+            component: 'texte1',
+            revele: false
         }
     },
     methods: {
@@ -46,11 +50,15 @@ export default {
        toggleOng2: function() {
            this.toggle1 = false,
            this.toggle2 = true
+       },
+       toggleModale: function() {
+           this.revele = !this.revele
        }
     },
     components: {
        'texte1': Texte1,
-       'texte2': Texte2
+       'texte2': Texte2,
+       'modale': Modale
     }
 }
 
