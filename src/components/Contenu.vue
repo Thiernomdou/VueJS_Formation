@@ -21,7 +21,7 @@
 
             <div class="form-group">
                 <label for="prenom">Ton prénom</label>
-                <input v-model="formData.prenom" type="text" id="prenom" class="form-control">
+                <input v-on:input="toggleResult" v-model="formData.prenom" type="text" id="prenom" class="form-control">
             </div>
 
             <div class="form-group">
@@ -30,11 +30,13 @@
             </div>
 
             <!-- Select Box -->
+            <h3>Select Box</h3>
             <select v-model="formData.select">
                 <option v-for="(pays, index) in formData.listePays" :key="index">{{ pays }}</option>
             </select>
 
             <!-- Les checkbox -->
+            <h3 class="mt-3">CheckBoxs</h3>
             <div class="form-check">
                 <input v-model="formData.checkFruits" type="checkbox" id="fraise" class="form-check-input" value="fraise">
                 <label for="fraise">Fraise</label>
@@ -51,28 +53,35 @@
             </div>
 
 
-            <h2>Résultats</h2>
             
+            <button v-on:click.prevent="envoiForm" class="btn btn-primary mt-3 mb-3">Envoyez les données</button>
 
-            <div class="card p-3">
-                <p>Prénom : {{ formData.prenom }}</p>
-                <p style="white-space: pre">Texte : {{ formData.text }}</p>
-            
-                <p>Résultats checkboxs</p>
-                <ul>
-                    <li v-for="(fruit, index) in formData.checkFruits" :key="index">{{ fruit }}</li>
-                </ul>
+            <div v-if="infoSubmit">
+                <h2>Résultats</h2>
 
-                <p>Choisissez un pays : {{ formData.select }}</p>
-            
+                <div class="card p-3">
+                    <p>Prénom : {{ formData.prenom }}</p>
+                    <p style="white-space: pre">Texte : {{ formData.text }}</p>
+                
+                    <p>Résultats checkboxs</p>
+                    <ul>
+                        <li v-for="(fruit, index) in formData.checkFruits" :key="index">{{ fruit }}</li>
+                    </ul>
+
+                    <p>Choisissez un pays : {{ formData.select }}</p>
+                
+                </div>
+
             </div>
-    
+            
+
         </form>
         
     </div>
 </template>
 
 <script>
+
 
 
 // import Texte1 from './Texte1'
@@ -104,7 +113,8 @@ export default {
                 checkFruits: [],
                 select: '',
                 listePays: ['France', 'Guinée', 'Canada', 'Etats-Unis']
-            }
+            },
+            infoSubmit: false
         }
     },
     methods: {
@@ -119,6 +129,13 @@ export default {
     //    toggleModale: function() {
     //        this.revele = !this.revele
     //    }
+
+        envoiForm: function() {
+            this.infoSubmit = true;
+        },
+        toggleResult: function() {
+            this.infoSubmit = false;
+        }
     },
     // Quand le composant sera bien affiché
     // mounted() {
