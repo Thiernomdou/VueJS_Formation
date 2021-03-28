@@ -29,11 +29,36 @@
                 <textarea v-model="formData.text" id="text" class="form-control"></textarea>
             </div>
 
+
+            <!-- Les checkbox -->
+            <div class="form-check">
+                <input v-model="formData.checkFruits" type="checkbox" id="fraise" class="form-check-input" value="fraise">
+                <label for="fraise">Fraise</label>
+            </div>
+
+            <div class="form-check">
+                <input v-model="formData.checkFruits" type="checkbox" id="pomme" class="form-check-input" value="pomme">
+                <label for="pomme">Pomme</label>
+            </div>
+
+            <div class="form-check">
+                <input v-model="formData.checkFruits" type="checkbox" id="cerises" class="form-check-input" value="cerises">
+                <label for="cerises">Cerises</label>
+            </div>
+
+
             <h2>Résultats</h2>
+            
 
             <div class="card p-3">
                 <p>Prénom : {{ formData.prenom }}</p>
                 <p style="white-space: pre">Texte : {{ formData.text }}</p>
+            
+                <p>Résultats checkboxs</p>
+                <ul>
+                    <li v-for="(fruit, index) in formData.checkFruits" :key="index">{{ fruit }}</li>
+                </ul>
+            
             </div>
     
         </form>
@@ -69,7 +94,8 @@ export default {
 
             formData : {
                 prenom : '',
-                text: ''
+                text: '',
+                checkFruits: []
             }
         }
     },
