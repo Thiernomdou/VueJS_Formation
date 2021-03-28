@@ -13,10 +13,31 @@
 
         <div v-on:click="toggleModale" class="btn btn-success">Ouvre la modale</div> -->
         
-        <h1>Appel à une API</h1>
-        <img :src="urlImg" alt="image">
+        <!-- <h1>Appel à une API</h1>
+        <img :src="urlImg" alt="image"> -->
 
+        <h1>Formulaire</h1>
+        <form>
 
+            <div class="form-group">
+                <label for="prenom">Ton prénom</label>
+                <input v-model="formData.prenom" type="text" id="prenom" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="text">Ton texte</label>
+                <textarea v-model="formData.text" id="text" class="form-control"></textarea>
+            </div>
+
+            <h2>Résultats</h2>
+
+            <div class="card p-3">
+                <p>Prénom : {{ formData.prenom }}</p>
+                <p style="white-space: pre">Texte : {{ formData.text }}</p>
+            </div>
+    
+        </form>
+        
     </div>
 </template>
 
@@ -27,7 +48,7 @@
 // import Texte2 from './Texte2'
 // import Modale from './Modale'
 
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
     name: 'Contenu',
@@ -44,7 +65,12 @@ export default {
             // toggle2: false,
             // component: 'texte1',
             // revele: false
-            urlImg : null
+            // urlImg : null
+
+            formData : {
+                prenom : '',
+                text: ''
+            }
         }
     },
     methods: {
@@ -61,14 +87,14 @@ export default {
     //    }
     },
     // Quand le composant sera bien affiché
-    mounted() {
-        axios
-        .get('https://api.thecatapi.com/v1/images/search')
-        .then(reponse => {
-            console.log(reponse);
-            this.urlImg = reponse.data[0].url
-        })
-    },
+    // mounted() {
+    //     axios
+    //     .get('https://api.thecatapi.com/v1/images/search')
+    //     .then(reponse => {
+    //         console.log(reponse);
+    //         this.urlImg = reponse.data[0].url
+    //     })
+    // },
     components: {
     //    'texte1': Texte1,
     //    'texte2': Texte2,
