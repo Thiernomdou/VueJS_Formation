@@ -29,6 +29,10 @@
                 <textarea v-model="formData.text" id="text" class="form-control"></textarea>
             </div>
 
+            <!-- Select Box -->
+            <select v-model="formData.select">
+                <option v-for="(pays, index) in formData.listePays" :key="index">{{ pays }}</option>
+            </select>
 
             <!-- Les checkbox -->
             <div class="form-check">
@@ -58,6 +62,8 @@
                 <ul>
                     <li v-for="(fruit, index) in formData.checkFruits" :key="index">{{ fruit }}</li>
                 </ul>
+
+                <p>Choisissez un pays : {{ formData.select }}</p>
             
             </div>
     
@@ -92,10 +98,12 @@ export default {
             // revele: false
             // urlImg : null
 
-            formData : {
-                prenom : '',
+            formData: {
+                prenom: '',
                 text: '',
-                checkFruits: []
+                checkFruits: [],
+                select: '',
+                listePays: ['France', 'Guinée', 'Canada', 'Etats-Unis']
             }
         }
     },
