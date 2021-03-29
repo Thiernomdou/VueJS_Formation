@@ -11,7 +11,7 @@
         name: 'Header',
         data() {
             return {
-                titre: 'Mon titre de base'
+                titre: 'La To-Do Liste'
             }
         },
         //on les utilise si on veut intervenir

@@ -16,8 +16,8 @@
         <!-- <h1>Appel à une API</h1>
         <img :src="urlImg" alt="image"> -->
 
-        <h1>Formulaire</h1>
-        <form>
+        <!-- <h1>Formulaire</h1> -->
+        <!-- <form>
 
             <div class="form-group">
                 <label for="prenom">Ton prénom</label>
@@ -27,16 +27,16 @@
             <div class="form-group">
                 <label for="text">Ton texte</label>
                 <textarea v-model="formData.text" id="text" class="form-control"></textarea>
-            </div>
+            </div> -->
 
             <!-- Select Box -->
-            <h3>Select Box</h3>
+            <!-- <h3>Select Box</h3>
             <select v-model="formData.select">
                 <option v-for="(pays, index) in formData.listePays" :key="index">{{ pays }}</option>
-            </select>
+            </select> -->
 
             <!-- Les checkbox -->
-            <h3 class="mt-3">CheckBoxs</h3>
+            <!-- <h3 class="mt-3">CheckBoxs</h3>
             <div class="form-check">
                 <input v-model="formData.checkFruits" type="checkbox" id="fraise" class="form-check-input" value="fraise">
                 <label for="fraise">Fraise</label>
@@ -75,14 +75,33 @@
             </div>
             
 
+        </form> -->
+
+        <h1>Rentrer des choses à faire</h1>
+        <form>
+
+            <div class="form-group">
+                <label for="action">Action</label>
+                <input v-model="formData.tache" type="text" id="action" class="form-control">
+            </div>
+
+            <button v-on:click.prevent="creationItem" class="btn btn-primary mt-2 mb-3">Créer une tâche</button>
+
         </form>
+
+        <ul>
+            <li v-for="(tache, index) in tableauTaches" :key="index">
+                <item :tache="tache" :id="index" :suppression="suppression"></item>
+            </li>
+        </ul>
         
     </div>
 </template>
 
+
 <script>
 
-
+import Item from './Item'
 
 // import Texte1 from './Texte1'
 // import Texte2 from './Texte2'
@@ -107,14 +126,21 @@ export default {
             // revele: false
             // urlImg : null
 
+            // formData: {
+            //     prenom: '',
+            //     text: '',
+            //     checkFruits: [],
+            //     select: '',
+            //     listePays: ['France', 'Guinée', 'Canada', 'Etats-Unis']
+            // },
+            // infoSubmit: false
+
+            //to-doliste
             formData: {
-                prenom: '',
-                text: '',
-                checkFruits: [],
-                select: '',
-                listePays: ['France', 'Guinée', 'Canada', 'Etats-Unis']
+                tache: ''
             },
-            infoSubmit: false
+            tableauTaches: ['JavaScript', 'Vue', 'Python', 'React', 'Angular']
+            
         }
     },
     methods: {
@@ -130,11 +156,19 @@ export default {
     //        this.revele = !this.revele
     //    }
 
-        envoiForm: function() {
-            this.infoSubmit = true;
+        // envoiForm: function() {
+        //     this.infoSubmit = true;
+        // },
+        // toggleResult: function() {
+        //     this.infoSubmit = false;
+        // }
+
+        creationItem: function() {
+            this.tableauTaches.push(this.formData.tache);
+            this.formData.tache = '';
         },
-        toggleResult: function() {
-            this.infoSubmit = false;
+        suppression: function() {
+            this.tableauTaches.splice(e.target.parentNode.id, 1)
         }
     },
     // Quand le composant sera bien affiché
@@ -150,6 +184,7 @@ export default {
     //    'texte1': Texte1,
     //    'texte2': Texte2,
     //    'modale': Modale
+    'item': Item
     }
 }
 
@@ -160,7 +195,11 @@ export default {
     h1 {
         margin-top: 100px!important;
     }
-    .onglets {
+    ul {
+    list-style-type: none;
+    padding: 0;
+}
+    /* .onglets {
         height: 200px;
-    }
+    } */
 </style>
