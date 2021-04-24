@@ -1,7 +1,11 @@
 <template>
-  <div id="app">
+<div>
+  <header-top></header-top>
+
+  <div id="app" class="container text-center">
     <contenu></contenu>
-    <header-top></header-top>
+  </div>
+  
   </div>
 </template>
 
@@ -17,7 +21,7 @@ export default {
   //d'enregistrer les composants localement
   components: {
     'contenu': Contenu,
-    'header-top' : Header
+    'header-top': Header,
   }
 }
 </script>
